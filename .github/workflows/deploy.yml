@@ -1,0 +1,72 @@
+# This is a basic workflow to help you get started with Actions
+
+name: UiPath End-to-End CI/CD Pipeline
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+ build-and-deploy:
+    # The type of runner that the job will run on
+  #  runs-on: ubuntu-latest
+
+
+    runs-on: windows-latest  # Recommended runner for compiling Windows/Cross-platform UiPath projects
+
+    env:
+      # These use secrets configured in your GitHub Repository settings
+      UIPATH_URL: "https://cloud.uipath.com/mnscorp/" # ${{ secrets.UIPATH_ORCHESTRATOR_URL }}          # e.g., https://uipath.com
+      UIPATH_CLIENT_ID: "24514b61-3ea2-473d-a654-2099b5cc6193" # ${{ secrets.UIPATH_EXTERNAL_APP_ID }}     # External App client ID
+      UIPATH_CLIENT_SECRET: "axoJfTEgE(AGhZdLEdqK)w?_6iW?$g1O5Zo?gMrRxvKp4Y$H6d0KxHrAl@nPJCFH" # ${{ secrets.UIPATH_EXTERNAL_APP_SECRET }} # External App secret
+      UIPATH_FOLDER: "Shared"                                     # The Orchestrator Folder to deploy to
+
+    steps:
+      # Step 1: Checkout the source code from Git
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      # Step 2: Setup .NET SDK (Required to run the modern UiPath CLI tool)
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      # Step 3: Install the modern UiPath CLI tool
+      - name: Install UiPath CLI
+        shell: pwsh
+        run: |
+          npm install -g @uipath/cli
+          uip tools install @uipath/rpa-tool 
+          #dotnet tool install --global UiPath.CLI.Windows 
+
+      # Step 4: Validate and Analyze the project (Optional but recommended)
+      - name: Validate UiPath Project
+        shell: pwsh
+        run: |
+             uip rpa-legacy validate "."
+      # Step 5: Pack the project into a Nuget package (.nupkg)
+    
+      # Uses the unique run number to dynamically version the package output
+      - name: Pack UiPath Project
+        shell: pwsh
+        run: |
+          mkdir output
+          uip rpa pack "." "../output" --package-version "1.0.${{ github.run_number }}"
+
+      # Step 6: Deploy the built artifact to the target Orchestrator folder
+      - name: Deploy to UiPath Orchestrator
+        shell: pwsh
+        run: |
+          uip rpa pack --help
+          uipcli rpa deploy --packagePath "./output" --orchestratorUrl "${{ env.UIPATH_URL }}" --folderName "${{ env.UIPATH_FOLDER }}" --clientId "${{ env.UIPATH_CLIENT_ID }}" --clientSecret "${{ env.UIPATH_CLIENT_SECRET }}"
+
