@@ -68,5 +68,5 @@ jobs:
         shell: pwsh
         run: |
           uip rpa pack --help
-          uipcli rpa deploy --packagePath "./output" --orchestratorUrl "${{ env.UIPATH_URL }}" --folderName "${{ env.UIPATH_FOLDER }}" --clientId "${{ env.UIPATH_CLIENT_ID }}" --clientSecret "${{ env.UIPATH_CLIENT_SECRET }}"
+          uip rpa deploy --packagePath "./output" --orchestratorUrl "${{ env.UIPATH_URL }}" --folderName "${{ env.UIPATH_FOLDER }}" --clientId "${{ env.UIPATH_CLIENT_ID }}" --clientSecret "${{ env.UIPATH_CLIENT_SECRET }}"
 
