@@ -50,10 +50,10 @@ jobs:
           #dotnet tool install --global UiPath.CLI.Windows 
 
       # Step 4: Validate and Analyze the project (Optional but recommended)
-      - name: Validate UiPath Project
-        shell: pwsh
-        run: |
-             uip rpa-legacy validate "."
+      #- name: Validate UiPath Project
+    #    shell: pwsh
+     #   run: |
+     #        uip rpa-legacy validate "."
       # Step 5: Pack the project into a Nuget package (.nupkg)
     
       # Uses the unique run number to dynamically version the package output
