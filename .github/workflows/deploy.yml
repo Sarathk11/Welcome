@@ -71,7 +71,6 @@ jobs:
           uip orchestrator --help
           uip orchestrator  packages --help
             uip orchestrator  packages upload --help
-           uip orchestrator packages upload --packagesFolder "../output" --orchestratorUrl "${{ env.UIPATH_URL }}" --tenant  "${{env.UIPATH_TENANT_NAME}}"  --folderName "${{ env.UIPATH_FOLDER }}" --clientId "${{ env.UIPATH_CLIENT_ID }}" --clientSecret "${{ env.UIPATH_CLIENT_SECRET }}"
-  
+           uip orchestrator packages upload  --feed-id  <"${{env.UIPATH_TENANT_NAME}}">   --folder-path <"${{ env.UIPATH_FOLDER }}">  
            # uip rpa deploy --packagePath "../output"  --orchestratorUrl "${{ env.UIPATH_URL }}" --folderName "${{ env.UIPATH_FOLDER }}" --clientId "${{ env.UIPATH_CLIENT_ID }}" --clientSecret "${{ env.UIPATH_CLIENT_SECRET }}"
          
