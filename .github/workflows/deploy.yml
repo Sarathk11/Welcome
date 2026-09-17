@@ -56,9 +56,9 @@ jobs:
         shell: pwsh
         run: |
           uip login `
-            --client-id "${{ env.UIPATH_CLIENT_ID }}"
-            --client-secret "${{ env.UIPATH_CLIENT_SECRET }}"
-            --tenant "${{env.UIPATH_TENANT_NAME}}"`
+            --client-id "${{ env.UIPATH_CLIENT_ID }}" `
+            --client-secret "${{ env.UIPATH_CLIENT_SECRET }}" `
+            --tenant "${{env.UIPATH_TENANT_NAME}}" `
             --url "${{ env.UIPATH_URL }}"
       # Step 4: Validate and Analyze the project (Optional but recommended)
       #- name: Validate UiPath Project
