@@ -52,9 +52,12 @@ jobs:
           #dotnet tool install --global UiPath.CLI.Windows 
 # Step 4: Authenticate against Orchestrator (this was missing before —
       # every command after this needs a valid session)
+     
       - name: Login to Orchestrator
         shell: pwsh
         run: |
+         uip login --help
+         uip --version
           uip login `
             --client-id "${{ env.UIPATH_CLIENT_ID }}" `
             --client-secret "${{ env.UIPATH_CLIENT_SECRET }}" `
