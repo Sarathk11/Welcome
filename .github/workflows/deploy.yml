@@ -27,7 +27,7 @@ jobs:
       # These use secrets configured in your GitHub Repository settings
       UIPATH_URL: "https://cloud.uipath.com/mnscorp/WPT_Prod/orchestrator_" # ${{ secrets.UIPATH_ORCHESTRATOR_URL }}          # e.g., https://uipath.com
       UIPATH_CLIENT_ID: "24514b61-3ea2-473d-a654-2099b5cc6193" # ${{ secrets.UIPATH_EXTERNAL_APP_ID }}     # External App client ID
-      UIPATH_CLIENT_SECRET: 'axoJfTEgE(AGhZdLEdqK)w?_6iW?$g1O5Zo?gMrRxvKp4Y$H6d0KxHrAl@nPJCFH' # ${{ secrets.UIPATH_EXTERNAL_APP_SECRET }} # External App secret
+      UIPATH_CLIENT_SECRET: "axoJfTEgE(AGhZdLEdqK)w?_6iW?`$g1O5Zo?gMrRxvKp4Y`$H6d0KxHrAl@nPJCFH" # ${{ secrets.UIPATH_EXTERNAL_APP_SECRET }} # External App secret
       UIPATH_FOLDER: "Shared" # The Orchestrator Folder to deploy to
       UIPATH_TENANT_NAME: "WPT_Prod"
 
